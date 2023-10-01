@@ -1,0 +1,10 @@
+# IDE configuration files
+.idea/
+.vscode/
+
+# Operating system files
+.DS_Store
+
+# Go
+go.work
+go.work.sum

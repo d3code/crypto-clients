@@ -8,38 +8,40 @@ import (
     "time"
 )
 
-func (c *Configuration) CryptocurrencyMap() map[int]Cryptocurrency {
-    var responses = make(map[int]Cryptocurrency)
+func (c *Configuration) CryptocurrencyMap() []*CryptocurrencyMapResponse {
+    var responses []*CryptocurrencyMapResponse
 
-    cryptocurrencyMapPage(c, 1, &responses)
+    responses = append(responses, cryptocurrencyMapPage(c, 1)...)
     return responses
 }
 
-func cryptocurrencyMapPage(c *Configuration, start int, responses *map[int]Cryptocurrency) {
+func cryptocurrencyMapPage(c *Configuration, start int) []*CryptocurrencyMapResponse {
     requestURL := "/v1/cryptocurrency/map"
 
     values := url.Values{}
     values.Set("listing_status", "active,inactive,untracked")
     values.Set("start", fmt.Sprintf("%d", start))
 
-    resBody, err := request(requestURL, values, c)
+    response, err := request(requestURL, values, c)
     if err != nil {
         zlog.Log.Error(err)
     }
+
+    var responseMap []*CryptocurrencyMapResponse
 
     var cmcResponse CryptocurrencyMapResponse
-    err = json.Unmarshal(resBody.Body, &cmcResponse)
+    err = json.Unmarshal(response.Body, &cmcResponse)
     if err != nil {
         zlog.Log.Error(err)
     }
 
-    for _, cryptocurrency := range cmcResponse.Data {
-        (*responses)[cryptocurrency.Id] = cryptocurrency
+    responseMap = append(responseMap, &cmcResponse)
+    if len(cmcResponse.Data) == 10000 {
+        re := cryptocurrencyMapPage(c, start+10000)
+        responseMap = append(responseMap, re...)
     }
 
-    if len(cmcResponse.Data) == 10000 {
-        cryptocurrencyMapPage(c, start+10000, responses)
-    }
+    return responseMap
 }
 
 type Cryptocurrency struct {
