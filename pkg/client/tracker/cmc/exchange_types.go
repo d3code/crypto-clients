@@ -2,49 +2,55 @@ package cmc
 
 import "time"
 
+type Exchange struct {
+    Id                  int       `json:"id"`
+    Name                string    `json:"name"`
+    Slug                string    `json:"slug"`
+    IsActive            int       `json:"is_active"`
+    IsListed            int       `json:"is_listed"`
+    IsRedistributable   int       `json:"is_redistributable"`
+    FirstHistoricalData time.Time `json:"first_historical_data"`
+    LastHistoricalData  time.Time `json:"last_historical_data"`
+}
+
 type ExchangeMap struct {
-    Data []struct {
-        Id                  int       `json:"id"`
-        Name                string    `json:"name"`
-        Slug                string    `json:"slug"`
-        IsActive            int       `json:"is_active"`
-        IsListed            int       `json:"is_listed"`
-        IsRedistributable   int       `json:"is_redistributable"`
-        FirstHistoricalData time.Time `json:"first_historical_data"`
-        LastHistoricalData  time.Time `json:"last_historical_data"`
-    } `json:"data"`
-    Status Status `json:"status"`
+    Data   []Exchange `json:"data"`
+    Status Status     `json:"status"`
+}
+
+type Urls struct {
+    Website []string      `json:"website"`
+    Twitter []string      `json:"twitter"`
+    Blog    []interface{} `json:"blog"`
+    Chat    []string      `json:"chat"`
+    Fee     []string      `json:"fee"`
 }
 
 type ExchangeInfo struct {
-    Data map[string]struct {
-        Id                    int           `json:"id"`
-        Name                  string        `json:"name"`
-        Slug                  string        `json:"slug"`
-        Logo                  string        `json:"logo"`
-        Description           string        `json:"description"`
-        DateLaunched          time.Time     `json:"date_launched"`
-        Notice                interface{}   `json:"notice"`
-        Countries             []interface{} `json:"countries"`
-        Fiats                 []string      `json:"fiats"`
-        Tags                  interface{}   `json:"tags"`
-        Type                  string        `json:"type"`
-        MakerFee              float64       `json:"maker_fee"`
-        TakerFee              float64       `json:"taker_fee"`
-        WeeklyVisits          int           `json:"weekly_visits"`
-        SpotVolumeUsd         float64       `json:"spot_volume_usd"`
-        SpotVolumeLastUpdated time.Time     `json:"spot_volume_last_updated"`
-        PorStatus             int           `json:"porStatus"`
-        PorAuditStatus        int           `json:"porAuditStatus"`
-        Urls                  struct {
-            Website []string      `json:"website"`
-            Twitter []string      `json:"twitter"`
-            Blog    []interface{} `json:"blog"`
-            Chat    []string      `json:"chat"`
-            Fee     []string      `json:"fee"`
-        } `json:"urls"`
-    } `json:"data"`
-    Status Status `json:"status"`
+    Id                    int           `json:"id"`
+    Name                  string        `json:"name"`
+    Slug                  string        `json:"slug"`
+    Logo                  string        `json:"logo"`
+    Description           string        `json:"description"`
+    DateLaunched          time.Time     `json:"date_launched"`
+    Notice                interface{}   `json:"notice"`
+    Countries             []interface{} `json:"countries"`
+    Fiats                 []string      `json:"fiats"`
+    Tags                  interface{}   `json:"tags"`
+    Type                  string        `json:"type"`
+    MakerFee              float64       `json:"maker_fee"`
+    TakerFee              float64       `json:"taker_fee"`
+    WeeklyVisits          int           `json:"weekly_visits"`
+    SpotVolumeUsd         float64       `json:"spot_volume_usd"`
+    SpotVolumeLastUpdated time.Time     `json:"spot_volume_last_updated"`
+    PorStatus             int           `json:"porStatus"`
+    PorAuditStatus        int           `json:"porAuditStatus"`
+    Urls                  Urls          `json:"urls"`
+}
+
+type ExchangeInfoResponse struct {
+    Data   map[string]ExchangeInfo `json:"data"`
+    Status Status                  `json:"status"`
 }
 
 type ExchangeListingsLatest struct {

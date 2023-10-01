@@ -8,7 +8,7 @@ import (
     "strings"
 )
 
-func (c *Configuration) GetExchangeInfo(id string) (*ExchangeInfo, error) {
+func (c *Configuration) GetExchangeInfo(id string) (*ExchangeInfoResponse, error) {
     requestURL := "/v1/exchange/info"
 
     values := url.Values{}
@@ -25,7 +25,7 @@ func (c *Configuration) GetExchangeInfo(id string) (*ExchangeInfo, error) {
     }
 
     if resBody.StatusCode == 400 {
-        var cmcResponse ExchangeInfo
+        var cmcResponse ExchangeInfoResponse
         unmarshalError := json.Unmarshal(resBody.Body, &cmcResponse)
         if unmarshalError != nil {
             return nil, unmarshalError
@@ -46,7 +46,7 @@ func (c *Configuration) GetExchangeInfo(id string) (*ExchangeInfo, error) {
         return nil, fmt.Errorf("status code %d", resBody.StatusCode)
     }
 
-    var cmcResponse ExchangeInfo
+    var cmcResponse ExchangeInfoResponse
     unmarshalError := json.Unmarshal(resBody.Body, &cmcResponse)
     if unmarshalError != nil {
         return nil, unmarshalError
