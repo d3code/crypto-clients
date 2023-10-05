@@ -66,19 +66,18 @@ type ExchangeInfo struct {
     Name                  string              `json:"name"`
     Slug                  string              `json:"slug"`
     Logo                  string              `json:"logo"`
-    Description           string              `json:"description"`
-    DateLaunched          time.Time           `json:"date_launched"`
+    Description           *string             `json:"description"`
+    DateLaunched          *time.Time          `json:"date_launched"`
     Notice                string              `json:"notice"`
     Countries             []string            `json:"countries"`
     Fiats                 []string            `json:"fiats"`
-    Tags                  []string            `json:"tags"`
     Type                  string              `json:"type"`
     MakerFee              float64             `json:"maker_fee"`
     TakerFee              float64             `json:"taker_fee"`
-    WeeklyVisits          int                 `json:"weekly_visits"`
-    SpotVolumeUsd         float64             `json:"spot_volume_usd"`
-    SpotVolumeLastUpdated time.Time           `json:"spot_volume_last_updated"`
-    PorStatus             int                 `json:"porStatus"`
-    PorAuditStatus        int                 `json:"porAuditStatus"`
+    WeeklyVisits          *int                `json:"weekly_visits"`
+    SpotVolumeUsd         *float64            `json:"spot_volume_usd"`
+    SpotVolumeLastUpdated *time.Time          `json:"spot_volume_last_updated"`
+    PorStatus             *int                `json:"porStatus"`
+    PorAuditStatus        *int                `json:"porAuditStatus"`
     Urls                  map[string][]string `json:"urls"`
 }
