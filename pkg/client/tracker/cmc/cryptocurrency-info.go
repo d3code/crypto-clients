@@ -57,12 +57,12 @@ type CryptocurrencyInfo struct {
     Tags                          []string            `json:"tags"`
     Category                      string              `json:"category"`
     Notice                        string              `json:"notice"`
-    SelfReportedCirculatingSupply *int32              `json:"self_reported_circulating_supply"`
-    SelfReportedMarketCap         *int32              `json:"self_reported_market_cap"`
+    SelfReportedCirculatingSupply *float32            `json:"self_reported_circulating_supply"`
+    SelfReportedMarketCap         *float32            `json:"self_reported_market_cap"`
     SelfReportedTags              *[]string           `json:"self_reported_tags"`
     InfiniteSupply                bool                `json:"infinite_supply"`
     ContractAddress               *[]ContractAddress  `json:"contract_address"`
-    Platform                      *Platform           `json:"platform"`
+    Platform                      *PlatformInfo       `json:"platform"`
     Urls                          map[string][]string `json:"urls"`
 }
 
@@ -81,4 +81,12 @@ type ContractPlatform struct {
 type ContractAddress struct {
     ContractAddress string           `json:"contract_address"`
     Platform        ContractPlatform `json:"platform"`
+}
+
+type PlatformInfo struct {
+    Id           string `json:"id"`
+    Name         string `json:"name"`
+    Symbol       string `json:"symbol"`
+    Slug         string `json:"slug"`
+    TokenAddress string `json:"token_address"`
 }
