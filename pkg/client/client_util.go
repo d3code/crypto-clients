@@ -51,7 +51,7 @@ func DoRequest(request *http.Request, replay bool, basePath string, removeHeader
                 }
 
                 if !(response.StatusCode >= 200 && response.StatusCode < 300) {
-                    zlog.Log.Warnf("(skip) Status code %v for saved response %s", response.StatusCode, file)
+                    //zlog.Log.Warnf("(skip) Status code %v for saved response %s", response.StatusCode, file)
                     continue
                 }
 
@@ -61,9 +61,9 @@ func DoRequest(request *http.Request, replay bool, basePath string, removeHeader
         }
     }
 
-    if replay {
-        zlog.Log.Warnf("No stored response found for %s %s", request.Method, request.URL)
-    }
+    //if replay {
+    //    zlog.Log.Warnf("No stored response found for %s %s", request.Method, request.URL)
+    //}
 
     response, err := getResponse(request)
     if err != nil {

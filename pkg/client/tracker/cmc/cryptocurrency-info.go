@@ -52,8 +52,8 @@ type CryptocurrencyInfo struct {
     Symbol                        string              `json:"symbol"`
     Slug                          string              `json:"slug"`
     Description                   string              `json:"description"`
-    DateAdded                     time.Time           `json:"date_added"`
-    DateLaunched                  time.Time           `json:"date_launched"`
+    DateAdded                     *time.Time          `json:"date_added"`
+    DateLaunched                  *time.Time          `json:"date_launched"`
     Tags                          []string            `json:"tags"`
     Category                      string              `json:"category"`
     Notice                        string              `json:"notice"`
